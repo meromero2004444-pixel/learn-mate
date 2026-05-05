@@ -41,7 +41,7 @@ export function GlowOrb({
         scale: [1, 1.1, 1] 
       }}
       transition={{ 
-        duration: 8, 
+        duration: 4, 
         repeat: Infinity,
         ease: "easeInOut" 
       }}

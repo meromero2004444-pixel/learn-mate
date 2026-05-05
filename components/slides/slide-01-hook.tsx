@@ -15,12 +15,12 @@ export function Slide01Hook() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <motion.span 
             initial={{ opacity: 0, tracking: "0.1em" }}
             animate={{ opacity: 1, tracking: "0.4em" }}
-            transition={{ duration: 1.5, delay: 0.2 }}
+            transition={{ duration: 1.0, delay: 0.2 }}
             className="text-sm md:text-base font-mono text-primary/60 uppercase block mb-12"
           >
             Graduation Project 2026
@@ -33,7 +33,7 @@ export function Slide01Hook() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="flex flex-col items-center gap-4"
           >
             <p className="text-2xl md:text-4xl text-foreground/90 font-light max-w-3xl mx-auto leading-tight">
@@ -47,7 +47,7 @@ export function Slide01Hook() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
         >
           <p className="text-[10px] text-muted-foreground tracking-[0.5em] uppercase">
