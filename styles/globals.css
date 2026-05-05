@@ -2,171 +2,92 @@
 @import 'tw-animate-css';
 
 /* ═══════════════════════════════════════════════════════
-   NEXUS — Bulletproof Theme System
-   Strategy: Define CSS vars in :root and html.dark,
-   then map them to Tailwind via @theme inline.
+   NEXUS — Theme System
+   Colors are injected via <style> in layout.tsx,
+   NOT via @theme, because @theme bakes values at compile time.
    ═══════════════════════════════════════════════════════ */
 
-/* ── 1. Raw CSS custom properties ── */
-:root {
-  /* Light Mode */
-  --bg:          #eef2ff;
-  --fg:          #1e1b4b;
-  --card-bg:     #ffffff;
-  --card-fg:     #1e1b4b;
-  --primary:     #7c3aed;
-  --primary-fg:  #ffffff;
-  --secondary:   #0284c7;
-  --secondary-fg:#ffffff;
-  --muted-bg:    #e0e7ff;
-  --muted-fg:    #6366f1;
-  --accent:      #db2777;
-  --accent-fg:   #ffffff;
-  --destructive: #dc2626;
-  --border:      #c7d2fe;
-  --ring:        #7c3aed;
-}
-
-html.dark {
-  /* Dark Mode */
-  --bg:          #09090b;
-  --fg:          #f8fafc;
-  --card-bg:     #18181b;
-  --card-fg:     #f8fafc;
-  --primary:     #a78bfa;
-  --primary-fg:  #1e1b4b;
-  --secondary:   #38bdf8;
-  --secondary-fg:#0c4a6e;
-  --muted-bg:    #27272a;
-  --muted-fg:    #a1a1aa;
-  --accent:      #f472b6;
-  --accent-fg:   #500724;
-  --destructive: #ef4444;
-  --border:      #3f3f46;
-  --ring:        #a78bfa;
-}
-
-/* ── 2. Map to Tailwind color tokens ── */
 @theme inline {
+  /* Fonts only — no colors here */
   --font-sans:    'Inter', sans-serif;
   --font-mono:    'Geist Mono', monospace;
   --font-display: 'Playfair Display', serif;
 
-  --color-background:           var(--bg);
-  --color-foreground:           var(--fg);
-  --color-card:                 var(--card-bg);
-  --color-card-foreground:      var(--card-fg);
-  --color-primary:              var(--primary);
-  --color-primary-foreground:   var(--primary-fg);
-  --color-secondary:            var(--secondary);
-  --color-secondary-foreground: var(--secondary-fg);
-  --color-muted:                var(--muted-bg);
-  --color-muted-foreground:     var(--muted-fg);
-  --color-accent:               var(--accent);
-  --color-accent-foreground:    var(--accent-fg);
-  --color-destructive:          var(--destructive);
-  --color-border:               var(--border);
-  --color-ring:                 var(--ring);
-
-  --radius: 1rem;
-
+  /* Animations */
   --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float:      float  3s ease-in-out infinite;
+
+  --radius: 1rem;
 }
 
-/* ── 3. Keyframes ── */
+/* ── Keyframes ── */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-10px); }
 }
 
-/* ── 4. Base layer — direct CSS (no Tailwind vars needed) ── */
+/* ── Base layer — uses CSS custom properties set in layout.tsx ── */
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* THE KEY FIX: set bg/fg directly from our vars, not from Tailwind */
-  html, body {
-    background-color: var(--bg);
-    color:            var(--fg);
-    transition: background-color 0.45s ease, color 0.3s ease;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    background-image:
-      radial-gradient(ellipse 60% 50% at 0% 0%,   color-mix(in srgb, var(--primary) 18%, transparent) 0%, transparent 100%),
-      radial-gradient(ellipse 60% 50% at 100% 100%, color-mix(in srgb, var(--secondary) 14%, transparent) 0%, transparent 100%);
-    background-attachment: fixed;
+    border-color: var(--color-border, #e2e8f0);
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
-
-  ::selection {
-    background-color: var(--primary);
-    color:            var(--primary-fg);
-    opacity: 0.4;
-  }
 }
 
-/* ── 5. Glassmorphism components (raw CSS — no Tailwind util dependency) ── */
+/* ── Glassmorphism components ── */
 @layer components {
   .glass {
-    background:             color-mix(in srgb, var(--card-bg) 55%, transparent);
-    border:                 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-    backdrop-filter:        blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    box-shadow:             0 4px 24px color-mix(in srgb, #000 8%, transparent);
-    transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    background:              rgba(255, 255, 255, 0.55);
+    border:                  1px solid rgba(0, 0, 0, 0.10);
+    backdrop-filter:         blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow:              0 4px 24px rgba(0, 0, 0, 0.06);
+    transition: background 0.4s ease, border-color 0.4s ease;
   }
 
   html.dark .glass {
-    background:  color-mix(in srgb, var(--card-bg) 65%, transparent);
-    border:      1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+    background:  rgba(24, 24, 27, 0.65);
+    border:      1px solid rgba(255, 255, 255, 0.08);
     box-shadow:  0 8px 32px rgba(0, 0, 0, 0.50);
   }
 
   .glass-card {
-    border-radius: var(--radius);
-    padding:       1.5rem;
-    transition:    transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: var(--radius, 1rem);
+    padding: 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
+
   .glass-card:hover {
     transform:  translateY(-4px);
-    box-shadow: 0 16px 40px color-mix(in srgb, #000 14%, transparent);
-  }
-  html.dark .glass-card:hover {
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--color-primary,   #7c3aed) 0%,
+      var(--color-secondary, #0284c7) 50%,
+      var(--color-accent,    #db2777) 100%
+    );
     -webkit-background-clip: text;
     background-clip:         text;
     color:                   transparent;
   }
 
   .glow-primary {
-    filter: drop-shadow(0 0 10px var(--primary));
+    filter: drop-shadow(0 0 10px var(--color-primary, #7c3aed));
   }
 }
 
-/* ── 6. Custom Scrollbar ── */
+/* ── Custom Scrollbar ── */
 .custom-scrollbar::-webkit-scrollbar       { width: 5px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background:    color-mix(in srgb, var(--primary) 40%, transparent);
+  background:    var(--color-primary, #7c3aed);
   border-radius: 9999px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--primary) 70%, transparent);
+  opacity: 0.4;
 }
