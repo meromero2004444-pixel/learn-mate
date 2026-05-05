@@ -20,9 +20,9 @@ export function Navigation({ currentSlide, totalSlides, onNavigate }: Navigation
       <button
         onClick={() => onNavigate("up")}
         disabled={currentSlide === 0}
-        className="w-10 h-10 rounded-full glass flex items-center justify-center text-foreground hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
+        className="w-10 h-10 rounded-full glass flex items-center justify-center text-black dark:text-white hover:text-primary dark:hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
       >
-        <ChevronUp className="w-5 h-5" />
+        <ChevronUp className="w-6 h-6" />
       </button>
       
       <div className="flex flex-col items-center gap-2 py-4">
@@ -34,7 +34,7 @@ export function Navigation({ currentSlide, totalSlides, onNavigate }: Navigation
               opacity: currentSlide === index ? 1 : 0.3
             }}
             className={`w-2 h-2 rounded-full transition-colors ${
-              currentSlide === index ? "bg-primary" : "bg-foreground"
+              currentSlide === index ? "bg-primary" : "bg-black dark:bg-white"
             }`}
           />
         ))}
@@ -43,9 +43,9 @@ export function Navigation({ currentSlide, totalSlides, onNavigate }: Navigation
       <button
         onClick={() => onNavigate("down")}
         disabled={currentSlide === totalSlides - 1}
-        className="w-10 h-10 rounded-full glass flex items-center justify-center text-foreground hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
+        className="w-10 h-10 rounded-full glass flex items-center justify-center text-black dark:text-white hover:text-primary dark:hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
       >
-        <ChevronDown className="w-5 h-5" />
+        <ChevronDown className="w-6 h-6" />
       </button>
     </motion.div>
   )
