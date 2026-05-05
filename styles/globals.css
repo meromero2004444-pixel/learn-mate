@@ -8,25 +8,26 @@
   --font-mono: 'Geist Mono', monospace;
   --font-display: 'Playfair Display', serif;
   
-  --color-background: oklch(var(--background));
-  --color-foreground: oklch(var(--foreground));
-  --color-card: oklch(var(--card));
-  --color-card-foreground: oklch(var(--card-foreground));
-  --color-popover: oklch(var(--popover));
-  --color-popover-foreground: oklch(var(--popover-foreground));
-  --color-primary: oklch(var(--primary));
-  --color-primary-foreground: oklch(var(--primary-foreground));
-  --color-secondary: oklch(var(--secondary));
-  --color-secondary-foreground: oklch(var(--secondary-foreground));
-  --color-muted: oklch(var(--muted));
-  --color-muted-foreground: oklch(var(--muted-foreground));
-  --color-accent: oklch(var(--accent));
-  --color-accent-foreground: oklch(var(--accent-foreground));
-  --color-destructive: oklch(var(--destructive));
-  --color-destructive-foreground: oklch(var(--destructive-foreground));
-  --color-border: oklch(var(--border));
-  --color-input: oklch(var(--input));
-  --color-ring: oklch(var(--ring));
+  /* Light Mode Default Colors */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0f172a;
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #06b6d4;
+  --color-secondary-foreground: #ffffff;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #8b5cf6;
   
   --radius: 1rem;
   
@@ -35,48 +36,27 @@
 }
 
 @layer base {
-  :root, .light {
-    --background: 0.98 0.01 250;
-    --foreground: 0.12 0.02 250;
-    --card: 1 0 0 / 0.6;
-    --card-foreground: 0.12 0.02 250;
-    --popover: 1 0 0;
-    --popover-foreground: 0.12 0.02 250;
-    --primary: 0.55 0.25 300;
-    --primary-foreground: 1 0 0;
-    --secondary: 0.65 0.2 200;
-    --secondary-foreground: 1 0 0;
-    --muted: 0.95 0.02 250 / 0.5;
-    --muted-foreground: 0.4 0.02 250;
-    --accent: 0.75 0.15 150;
-    --accent-foreground: 1 0 0;
-    --destructive: 0.6 0.2 30;
-    --destructive-foreground: 1 0 0;
-    --border: 0.85 0.03 250 / 0.5;
-    --input: 0.85 0.03 250 / 0.5;
-    --ring: 0.55 0.25 300 / 0.5;
-  }
-
   .dark {
-    --background: 0.12 0.02 250;
-    --foreground: 0.95 0.01 250;
-    --card: 0.16 0.03 250 / 0.4;
-    --card-foreground: 0.95 0.01 250;
-    --popover: 0.14 0.03 250;
-    --popover-foreground: 0.95 0.01 250;
-    --primary: 0.65 0.25 300;
-    --primary-foreground: 1 0 0;
-    --secondary: 0.75 0.2 200;
-    --secondary-foreground: 0.1 0.02 250;
-    --muted: 0.25 0.03 250 / 0.5;
-    --muted-foreground: 0.7 0.02 250;
-    --accent: 0.85 0.15 150;
-    --accent-foreground: 0.1 0.02 250;
-    --destructive: 0.6 0.2 30;
-    --destructive-foreground: 1 0 0;
-    --border: 0.3 0.03 250 / 0.2;
-    --input: 0.3 0.03 250 / 0.2;
-    --ring: 0.65 0.25 300 / 0.5;
+    /* Dark Mode (Cinematic) Overrides */
+    --color-background: #09090b;
+    --color-foreground: #fafafa;
+    --color-card: #18181b;
+    --color-card-foreground: #fafafa;
+    --color-popover: #09090b;
+    --color-popover-foreground: #fafafa;
+    --color-primary: #a78bfa;
+    --color-primary-foreground: #09090b;
+    --color-secondary: #22d3ee;
+    --color-secondary-foreground: #09090b;
+    --color-muted: #27272a;
+    --color-muted-foreground: #a1a1aa;
+    --color-accent: #27272a;
+    --color-accent-foreground: #fafafa;
+    --color-destructive: #7f1d1d;
+    --color-destructive-foreground: #fafafa;
+    --color-border: #27272a;
+    --color-input: #27272a;
+    --color-ring: #d4d4d8;
   }
 }
 
@@ -92,8 +72,8 @@
   body {
     @apply bg-background text-foreground selection:bg-primary/30 antialiased;
     background-image: 
-      radial-gradient(circle at 0% 0%, oklch(0.65 0.25 300 / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 100% 100%, oklch(0.75 0.2 200 / 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 0% 0%, var(--color-primary) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, var(--color-secondary) 0%, transparent 50%);
     background-attachment: fixed;
   }
   
@@ -104,7 +84,7 @@
 
 @layer components {
   .glass {
-    @apply bg-black/5 dark:bg-white/5 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+    @apply bg-white/50 dark:bg-black/40 backdrop-blur-xl border border-black/10 dark:border-white/10 shadow-lg dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
   }
   
   .glass-card {
@@ -116,7 +96,7 @@
   }
   
   .glow-primary {
-    @apply shadow-[0_0_20px_oklch(0.55_0.25_300_/_0.3)] dark:shadow-[0_0_20px_oklch(0.65_0.25_300_/_0.3)];
+    @apply shadow-[0_0_20px_var(--color-primary)] opacity-50;
   }
 }
 
