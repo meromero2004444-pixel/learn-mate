@@ -45,7 +45,7 @@ export function GlowOrb({
         repeat: Infinity,
         ease: "easeInOut" 
       }}
-      className={`absolute rounded-full ${sizeClasses[size]} ${colorClasses[color]} ${blurClasses[blur]} pointer-events-none mix-blend-screen`}
+      className={`absolute rounded-full ${sizeClasses[size]} ${colorClasses[color]} ${blurClasses[blur]} pointer-events-none mix-blend-multiply dark:mix-blend-screen`}
       style={position}
     />
   )

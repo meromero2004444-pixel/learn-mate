@@ -14,6 +14,7 @@ import { Slide09Advantage } from "@/components/slides/slide-09-advantage"
 import { Slide10Vision } from "@/components/slides/slide-10-vision"
 import { Slide11Closing } from "@/components/slides/slide-11-closing"
 import { SectionDivider } from "@/components/presentation/section-divider"
+import { ThemeToggle } from "@/components/presentation/theme-toggle"
 import { ChevronUp, ChevronDown, Menu, X } from "lucide-react"
 
 const slides = [
@@ -178,6 +179,16 @@ export default function Presentation() {
         >
           <ChevronDown className="w-6 h-6" />
         </button>
+      </motion.div>
+
+      {/* Theme Toggle Button */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="fixed top-4 right-20 md:right-6 z-50"
+      >
+        <ThemeToggle />
       </motion.div>
 
       {/* Mobile Menu Button */}
