@@ -54,6 +54,7 @@ export default function RootLayout({
         {/* ── Inject theme CSS custom properties directly ── */}
         <style dangerouslySetInnerHTML={{ __html: `
           :root {
+            /* Raw theme vars */
             --bg: #eef2ff;
             --fg: #1e1b4b;
             --card-bg: #ffffff;
@@ -65,9 +66,32 @@ export default function RootLayout({
             --nexus-muted: #e0e7ff;
             --nexus-muted-fg: #6366f1;
             --nexus-accent: #db2777;
+            --nexus-accent-fg: #ffffff;
+            --nexus-destructive: #dc2626;
             --nexus-border: #c7d2fe;
+            --nexus-ring: #7c3aed;
+
+            /* Tailwind color token aliases — MUST be set here to be dynamic */
+            --color-background: #eef2ff;
+            --color-foreground: #1e1b4b;
+            --color-card: #ffffff;
+            --color-card-foreground: #1e1b4b;
+            --color-primary: #7c3aed;
+            --color-primary-foreground: #ffffff;
+            --color-secondary: #0284c7;
+            --color-secondary-foreground: #ffffff;
+            --color-muted: #e0e7ff;
+            --color-muted-foreground: #6366f1;
+            --color-accent: #db2777;
+            --color-accent-foreground: #ffffff;
+            --color-destructive: #dc2626;
+            --color-destructive-foreground: #ffffff;
+            --color-border: #c7d2fe;
+            --color-input: #c7d2fe;
+            --color-ring: #7c3aed;
           }
           html.dark {
+            /* Raw theme vars */
             --bg: #09090b;
             --fg: #f8fafc;
             --card-bg: #18181b;
@@ -79,11 +103,33 @@ export default function RootLayout({
             --nexus-muted: #27272a;
             --nexus-muted-fg: #a1a1aa;
             --nexus-accent: #f472b6;
+            --nexus-accent-fg: #500724;
+            --nexus-destructive: #ef4444;
             --nexus-border: #3f3f46;
+            --nexus-ring: #a78bfa;
+
+            /* Tailwind color token aliases — dark overrides */
+            --color-background: #09090b;
+            --color-foreground: #f8fafc;
+            --color-card: #18181b;
+            --color-card-foreground: #f8fafc;
+            --color-primary: #a78bfa;
+            --color-primary-foreground: #1e1b4b;
+            --color-secondary: #38bdf8;
+            --color-secondary-foreground: #0c4a6e;
+            --color-muted: #27272a;
+            --color-muted-foreground: #a1a1aa;
+            --color-accent: #f472b6;
+            --color-accent-foreground: #500724;
+            --color-destructive: #ef4444;
+            --color-destructive-foreground: #f8fafc;
+            --color-border: #3f3f46;
+            --color-input: #3f3f46;
+            --color-ring: #a78bfa;
           }
           html, body {
-            background-color: var(--bg) !important;
-            color: var(--fg) !important;
+            background-color: var(--color-background) !important;
+            color: var(--color-foreground) !important;
             transition: background-color 0.45s ease, color 0.35s ease;
           }
         ` }} />
