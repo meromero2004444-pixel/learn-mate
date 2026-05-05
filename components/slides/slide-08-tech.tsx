@@ -22,15 +22,15 @@ const technologies = [
 
 export function Slide08Tech() {
   return (
-    <SlideWrapper id="tech">
-      <GlowOrb color="primary" size="md" position={{ top: "10%", left: "10%" }} blur="intense" />
-      <GlowOrb color="accent" size="lg" position={{ bottom: "5%", right: "5%" }} blur="intense" />
+    <SlideWrapper id="tech" className="flex items-center justify-center">
+      <GlowOrb color="secondary" size="md" position={{ top: "10%", left: "10%" }} blur="intense" />
+      <GlowOrb color="primary" size="lg" position={{ bottom: "5%", right: "5%" }} blur="intense" />
       
-      <div className="max-w-6xl mx-auto z-10 flex flex-col items-center">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto z-10 flex flex-col items-center px-6">
+        <div className="text-center mb-20">
           <AnimatedText 
             as="span" 
-            className="text-xs md:text-sm font-mono tracking-[0.3em] text-primary/80 uppercase block mb-4"
+            className="text-sm font-mono tracking-[0.4em] text-secondary/60 uppercase block mb-6"
           >
             Under the Hood
           </AnimatedText>
@@ -38,7 +38,7 @@ export function Slide08Tech() {
           <AnimatedText 
             as="h2" 
             delay={0.1}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
           >
             Powered by{" "}
             <span className="gradient-text">Excellence</span>
@@ -47,15 +47,17 @@ export function Slide08Tech() {
           <AnimatedText 
             as="p" 
             delay={0.2}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
             Built on proven technologies.
             <br />
-            Engineered for tomorrow.
+            <span className="text-foreground font-medium mt-2 block">Engineered for tomorrow.</span>
           </AnimatedText>
         </div>
 
-        <TechStack technologies={technologies} />
+        <div className="mt-8">
+          <TechStack technologies={technologies} />
+        </div>
       </div>
     </SlideWrapper>
   )

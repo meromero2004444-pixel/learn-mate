@@ -16,14 +16,15 @@ const comparisons = [
 
 export function Slide09Advantage() {
   return (
-    <SlideWrapper id="advantage">
-      <GlowOrb color="accent" size="xl" position={{ top: "20%", right: "-10%" }} blur="intense" />
+    <SlideWrapper id="advantage" className="flex items-center justify-center">
+      <GlowOrb color="secondary" size="xl" position={{ top: "20%", right: "-10%" }} blur="intense" />
+      <GlowOrb color="primary" size="lg" position={{ bottom: "10%", left: "-5%" }} blur="intense" />
       
-      <div className="max-w-6xl mx-auto z-10 flex flex-col items-center">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto z-10 flex flex-col items-center px-6">
+        <div className="text-center mb-20">
           <AnimatedText 
             as="span" 
-            className="text-xs md:text-sm font-mono tracking-[0.3em] text-accent/80 uppercase block mb-4"
+            className="text-sm font-mono tracking-[0.4em] text-secondary/60 uppercase block mb-6"
           >
             Act III — The Edge
           </AnimatedText>
@@ -31,7 +32,7 @@ export function Slide09Advantage() {
           <AnimatedText 
             as="h2" 
             delay={0.1}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
           >
             Why{" "}
             <span className="gradient-text">NEXUS</span>
@@ -41,13 +42,15 @@ export function Slide09Advantage() {
           <AnimatedText 
             as="p" 
             delay={0.2}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
-            Not just different. Definitively better.
+            Not just different. <span className="text-foreground font-medium">Definitively better.</span>
           </AnimatedText>
         </div>
 
-        <ComparisonTable items={comparisons} />
+        <div className="mt-8 w-full max-w-4xl">
+          <ComparisonTable items={comparisons} />
+        </div>
       </div>
     </SlideWrapper>
   )

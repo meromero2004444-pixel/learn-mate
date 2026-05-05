@@ -17,19 +17,19 @@ export function FeatureCard({ icon, title, description, delay = 0 }: FeatureCard
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="glass rounded-2xl p-8 gradient-border group cursor-default"
+      whileHover={{ scale: 1.05, y: -8 }}
+      className="glass-card group cursor-default"
     >
       <motion.div
         initial={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:glow-primary transition-all duration-300"
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:glow-primary transition-all duration-300"
       >
         {icon}
       </motion.div>
       
-      <h3 className="text-xl font-semibold text-foreground mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{description}</p>
+      <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{title}</h3>
+      <p className="text-muted-foreground leading-relaxed font-medium">{description}</p>
     </motion.div>
   )
 }

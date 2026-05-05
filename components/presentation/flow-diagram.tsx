@@ -22,13 +22,13 @@ export function FlowDiagram({ steps }: FlowDiagramProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="glass rounded-2xl p-6 md:p-8 w-full lg:w-64 text-center gradient-border"
+            className="glass-card w-full lg:w-64 text-center group hover:scale-105 transition-transform"
           >
-            <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-              <span className="text-primary font-bold text-lg">{index + 1}</span>
+            <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/30 transition-colors">
+              <span className="text-primary font-bold text-xl">{index + 1}</span>
             </div>
-            <h4 className="text-lg font-semibold text-foreground mb-2">{step.title}</h4>
-            <p className="text-sm text-muted-foreground">{step.description}</p>
+            <h4 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{step.title}</h4>
+            <p className="text-sm text-muted-foreground font-medium">{step.description}</p>
           </motion.div>
           
           {index < steps.length - 1 && (

@@ -26,15 +26,15 @@ const steps = [
 
 export function Slide05HowWorks() {
   return (
-    <SlideWrapper id="how-works">
-      <GlowOrb color="primary" size="lg" position={{ top: "10%", right: "5%" }} blur="intense" />
+    <SlideWrapper id="how-works" className="flex items-center justify-center">
+      <GlowOrb color="secondary" size="lg" position={{ top: "10%", right: "5%" }} blur="intense" />
       <GlowOrb color="accent" size="md" position={{ bottom: "20%", left: "5%" }} blur="intense" />
       
-      <div className="max-w-6xl mx-auto z-10">
-        <div className="text-center mb-16">
+      <div className="max-w-6xl mx-auto z-10 px-6">
+        <div className="text-center mb-20">
           <AnimatedText 
             as="span" 
-            className="text-xs md:text-sm font-mono tracking-[0.3em] text-primary/80 uppercase block mb-4"
+            className="text-sm font-mono tracking-[0.4em] text-secondary/60 uppercase block mb-6"
           >
             The Process
           </AnimatedText>
@@ -42,7 +42,7 @@ export function Slide05HowWorks() {
           <AnimatedText 
             as="h2" 
             delay={0.1}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-8"
           >
             How{" "}
             <span className="gradient-text">NEXUS</span>
@@ -52,15 +52,17 @@ export function Slide05HowWorks() {
           <AnimatedText 
             as="p" 
             delay={0.2}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
             Four steps to unified intelligence.
             <br />
-            From chaos to clarity in minutes.
+            <span className="text-foreground font-medium mt-2 block">From chaos to clarity in minutes.</span>
           </AnimatedText>
         </div>
 
-        <FlowDiagram steps={steps} />
+        <div className="mt-16">
+          <FlowDiagram steps={steps} />
+        </div>
       </div>
     </SlideWrapper>
   )

@@ -47,8 +47,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
-      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} font-sans antialiased`}>
+    <html lang="en" className="bg-background scroll-smooth">
+      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} font-sans antialiased selection:bg-primary/30`}>
+        {/* Cinematic Background Elements */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] animate-pulse-slow" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 contrast-150 brightness-50" />
+        </div>
+        
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

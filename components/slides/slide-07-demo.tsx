@@ -100,15 +100,15 @@ function AppMockup() {
 
 export function Slide07Demo() {
   return (
-    <SlideWrapper id="demo">
-      <GlowOrb color="primary" size="xl" position={{ top: "30%", left: "-10%" }} blur="intense" />
-      <GlowOrb color="accent" size="lg" position={{ bottom: "10%", right: "-5%" }} blur="intense" />
+    <SlideWrapper id="demo" className="flex flex-col items-center justify-center">
+      <GlowOrb color="secondary" size="xl" position={{ top: "10%", left: "-10%" }} blur="intense" />
+      <GlowOrb color="primary" size="lg" position={{ bottom: "10%", right: "-5%" }} blur="intense" />
       
-      <div className="max-w-6xl mx-auto z-10 w-full">
-        <div className="text-center mb-12">
+      <div className="max-w-6xl mx-auto z-10 w-full px-6">
+        <div className="text-center mb-16">
           <AnimatedText 
             as="span" 
-            className="text-xs md:text-sm font-mono tracking-[0.3em] text-primary/80 uppercase block mb-4"
+            className="text-sm font-mono tracking-[0.4em] text-secondary/60 uppercase block mb-6"
           >
             Live Preview
           </AnimatedText>
@@ -116,7 +116,7 @@ export function Slide07Demo() {
           <AnimatedText 
             as="h2" 
             delay={0.1}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
           >
             See It In{" "}
             <span className="gradient-text">Action</span>

@@ -114,12 +114,21 @@ export default function Presentation() {
             className="fixed inset-0 z-50 bg-background flex items-center justify-center"
           >
             <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-4xl font-bold gradient-text"
+              animate={{ 
+                scale: [1, 1.05, 1],
+                filter: ["blur(0px) brightness(1)", "blur(2px) brightness(1.5)", "blur(0px) brightness(1)"]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-6xl font-bold gradient-text tracking-widest"
             >
               NEXUS
             </motion.div>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "200px" }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              className="absolute bottom-1/3 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -134,9 +143,9 @@ export default function Presentation() {
         <button
           onClick={() => navigateSlide("up")}
           disabled={currentSlide === 0}
-          className="w-10 h-10 rounded-full glass flex items-center justify-center text-foreground hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
+          className="w-12 h-12 rounded-full glass flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110 glow-primary"
         >
-          <ChevronUp className="w-5 h-5" />
+          <ChevronUp className="w-6 h-6" />
         </button>
         
         <div className="flex flex-col items-center gap-2 py-3">
@@ -165,9 +174,9 @@ export default function Presentation() {
         <button
           onClick={() => navigateSlide("down")}
           disabled={currentSlide === slides.length - 1}
-          className="w-10 h-10 rounded-full glass flex items-center justify-center text-foreground hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110"
+          className="w-12 h-12 rounded-full glass flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110 glow-primary"
         >
-          <ChevronDown className="w-5 h-5" />
+          <ChevronDown className="w-6 h-6" />
         </button>
       </motion.div>
 

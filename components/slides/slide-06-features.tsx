@@ -48,15 +48,15 @@ const features = [
 
 export function Slide06Features() {
   return (
-    <SlideWrapper id="features">
+    <SlideWrapper id="features" className="flex items-center justify-center">
       <GlowOrb color="primary" size="lg" position={{ top: "5%", left: "10%" }} blur="intense" />
-      <GlowOrb color="accent" size="md" position={{ bottom: "10%", right: "15%" }} blur="intense" />
+      <GlowOrb color="secondary" size="md" position={{ bottom: "10%", right: "15%" }} blur="intense" />
       
-      <div className="max-w-7xl mx-auto z-10">
-        <div className="text-center mb-16">
+      <div className="max-w-7xl mx-auto z-10 px-6">
+        <div className="text-center mb-20">
           <AnimatedText 
             as="span" 
-            className="text-xs md:text-sm font-mono tracking-[0.3em] text-primary/80 uppercase block mb-4"
+            className="text-sm font-mono tracking-[0.4em] text-primary/60 uppercase block mb-6"
           >
             Capabilities
           </AnimatedText>
@@ -64,14 +64,14 @@ export function Slide06Features() {
           <AnimatedText 
             as="h2" 
             delay={0.1}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6"
           >
             Built for the{" "}
             <span className="gradient-text">Future</span>
           </AnimatedText>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}
