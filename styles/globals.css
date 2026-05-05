@@ -8,21 +8,21 @@
   --font-mono: 'Geist Mono', monospace;
   --font-display: 'Playfair Display', serif;
   
-  /* Light Mode Default Colors */
+  /* Light Mode Default Colors (Clean & Vibrant) */
   --color-background: #f8fafc;
   --color-foreground: #0f172a;
   --color-card: #ffffff;
   --color-card-foreground: #0f172a;
   --color-popover: #ffffff;
   --color-popover-foreground: #0f172a;
-  --color-primary: #8b5cf6;
+  --color-primary: #8b5cf6; /* Violet 500 */
   --color-primary-foreground: #ffffff;
-  --color-secondary: #06b6d4;
+  --color-secondary: #0ea5e9; /* Light Blue 500 */
   --color-secondary-foreground: #ffffff;
   --color-muted: #f1f5f9;
   --color-muted-foreground: #64748b;
-  --color-accent: #f1f5f9;
-  --color-accent-foreground: #0f172a;
+  --color-accent: #ec4899; /* Pink 500 for vibrant gradients */
+  --color-accent-foreground: #ffffff;
   --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
   --color-border: #e2e8f0;
@@ -39,24 +39,24 @@
   .dark {
     /* Dark Mode (Cinematic) Overrides */
     --color-background: #09090b;
-    --color-foreground: #fafafa;
+    --color-foreground: #f8fafc;
     --color-card: #18181b;
-    --color-card-foreground: #fafafa;
+    --color-card-foreground: #f8fafc;
     --color-popover: #09090b;
-    --color-popover-foreground: #fafafa;
-    --color-primary: #a78bfa;
+    --color-popover-foreground: #f8fafc;
+    --color-primary: #a78bfa; /* Violet 400 */
     --color-primary-foreground: #09090b;
-    --color-secondary: #22d3ee;
+    --color-secondary: #38bdf8; /* Light Blue 400 */
     --color-secondary-foreground: #09090b;
     --color-muted: #27272a;
     --color-muted-foreground: #a1a1aa;
-    --color-accent: #27272a;
-    --color-accent-foreground: #fafafa;
-    --color-destructive: #7f1d1d;
-    --color-destructive-foreground: #fafafa;
+    --color-accent: #f472b6; /* Pink 400 */
+    --color-accent-foreground: #09090b;
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #f8fafc;
     --color-border: #27272a;
     --color-input: #27272a;
-    --color-ring: #d4d4d8;
+    --color-ring: #a78bfa;
   }
 }
 
