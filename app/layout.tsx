@@ -55,7 +55,6 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
-          disableTransitionOnChange
         >
           {/* Cinematic Background Elements */}
           <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">

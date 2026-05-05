@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 
   // Avoid hydration mismatch
@@ -16,25 +16,26 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-10 h-10 rounded-full glass-card flex items-center justify-center p-0">
+      <div className="w-10 h-10 rounded-full glass flex items-center justify-center p-0">
         <span className="w-5 h-5 opacity-0" />
       </div>
     )
   }
 
+  const currentTheme = theme === "system" ? resolvedTheme : theme;
+
   return (
-    <motion.button
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="w-10 h-10 rounded-full glass flex items-center justify-center border border-border/50 text-foreground transition-colors hover:bg-foreground/10"
+    <button
+      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+      className="w-10 h-10 rounded-full glass flex items-center justify-center border border-border/50 text-foreground transition-all hover:scale-110 active:scale-95"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
+      {currentTheme === "dark" ? (
         <Sun className="w-5 h-5 text-primary" />
       ) : (
         <Moon className="w-5 h-5 text-secondary" />
       )}
-    </motion.button>
+    </button>
   )
 }
+
