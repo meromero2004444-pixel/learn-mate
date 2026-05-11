@@ -1,66 +1,60 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Slide01Hook } from "@/components/slides/slide-01-hook"
 import { Slide02Problem } from "@/components/slides/slide-02-problem"
 import { Slide03WhyMatters } from "@/components/slides/slide-03-why-matters"
 import { Slide04Solution } from "@/components/slides/slide-04-solution"
-import { Slide05HowWorks } from "@/components/slides/slide-05-how-works"
-import { Slide06Features } from "@/components/slides/slide-06-features"
-import { Slide07Demo } from "@/components/slides/slide-07-demo"
-import { Slide08Tech } from "@/components/slides/slide-08-tech"
-import { Slide09Advantage } from "@/components/slides/slide-09-advantage"
-import { Slide10Vision } from "@/components/slides/slide-10-vision"
-import { Slide11Closing } from "@/components/slides/slide-11-closing"
-import { SectionDivider } from "@/components/presentation/section-divider"
 import { ThemeToggle } from "@/components/presentation/theme-toggle"
+import { Header } from "@/components/presentation/header"
 import { ChevronUp, ChevronDown, Menu, X } from "lucide-react"
 
 const slides = [
-  { id: "hook", component: Slide01Hook },
-  { id: "problem", component: Slide02Problem },
-  { id: "why-matters", component: Slide03WhyMatters },
-  { id: "solution", component: Slide04Solution },
-  { id: "how-works", component: Slide05HowWorks },
-  { id: "features", component: Slide06Features },
-  { id: "demo", component: Slide07Demo },
-  { id: "tech", component: Slide08Tech },
-  { id: "advantage", component: Slide09Advantage },
-  { id: "vision", component: Slide10Vision },
-  { id: "closing", component: Slide11Closing }
-]
-
-const slideNames = [
-  "The Hook",
-  "The Problem",
-  "Why It Matters",
-  "Our Solution",
-  "How It Works",
-  "Key Features",
-  "Live Demo",
-  "Tech Stack",
-  "Competitive Edge",
-  "Future Vision",
-  "Closing"
+  { id: "cover", component: Slide01Hook, name: "الغلاف" },
+  { id: "team", component: Slide02Problem, name: "أسماء المجموعة" },
+  { id: "administration", component: Slide03WhyMatters, name: "إدارة الكلية" },
+  { id: "objectives", component: Slide04Solution, name: "أهداف المشروع" },
 ]
 
 export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
     setIsLoaded(true)
+
+    // Professional Intersection Observer for rock-solid slide detection
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = slides.findIndex((s) => s.id === entry.target.id)
+            if (index !== -1) setCurrentSlide(index)
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    slides.forEach((slide) => {
+      const el = document.getElementById(slide.id)
+      if (el) observerRef.current?.observe(el)
+    })
+
+    return () => observerRef.current?.disconnect()
   }, [])
 
   const scrollToSlide = useCallback((index: number) => {
     const slideId = slides[index]?.id
     if (slideId) {
       const element = document.getElementById(slideId)
-      element?.scrollIntoView({ behavior: "smooth" })
-      setCurrentSlide(index)
-      setIsMenuOpen(false)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+        setIsMenuOpen(false)
+      }
     }
   }, [])
 
@@ -72,25 +66,8 @@ export default function Presentation() {
   }, [currentSlide, scrollToSlide])
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2
-      
-      for (let i = slides.length - 1; i >= 0; i--) {
-        const element = document.getElementById(slides[i].id)
-        if (element && element.offsetTop <= scrollPosition) {
-          setCurrentSlide(i)
-          break
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+      if (e.key === "ArrowDown" || e.key === "PageDown") {
         e.preventDefault()
         navigateSlide("down")
       } else if (e.key === "ArrowUp" || e.key === "PageUp") {
@@ -98,177 +75,134 @@ export default function Presentation() {
         navigateSlide("up")
       }
     }
-
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [navigateSlide])
 
   return (
-    <main className="relative bg-background min-h-screen">
-      {/* Loading Screen */}
+    <main className="relative bg-background min-h-screen selection:bg-primary/30">
+      {/* Premium Loader */}
       <AnimatePresence>
         {!isLoaded && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-background flex items-center justify-center"
+            className="fixed inset-0 z-[100] bg-background flex items-center justify-center"
           >
             <motion.div
-              animate={{ 
-                scale: [1, 1.05, 1],
-                filter: ["blur(0px) brightness(1)", "blur(2px) brightness(1.5)", "blur(0px) brightness(1)"]
-              }}
-              transition={{ duration: 1.2, repeat: Infinity }}
-              className="text-6xl font-bold gradient-text tracking-widest"
+              animate={{ opacity: [0.5, 1, 0.5], scale: [0.98, 1, 0.98] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-5xl font-black gradient-text tracking-tighter"
             >
-              NEXUS
+              LearnMate
             </motion.div>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "200px" }}
-              transition={{ duration: 1.0, delay: 0.2 }}
-              className="absolute bottom-1/3 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent"
-            />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Navigation Sidebar */}
-      <motion.div
+      <Header />
+
+      {/* Modern Vertical Navigation Sidebar */}
+      <motion.nav
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="fixed right-4 md:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-3"
+        className="fixed right-6 top-1/2 -translate-y-1/2 z-[60] hidden lg:flex flex-col items-center gap-6"
       >
-        <button
-          onClick={() => navigateSlide("up")}
-          disabled={currentSlide === 0}
-          className="w-12 h-12 rounded-full glass flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110 glow-primary"
-        >
-          <ChevronUp className="w-6 h-6" />
-        </button>
-        
-        <div className="flex flex-col items-center gap-2 py-3">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToSlide(index)}
-              className="group relative"
-            >
-              <motion.div
-                animate={{
-                  scale: currentSlide === index ? 1.5 : 1,
-                  opacity: currentSlide === index ? 1 : 0.3
-                }}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  currentSlide === index ? "bg-primary" : "bg-foreground"
-                }`}
-              />
-              <span className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-xs text-foreground whitespace-nowrap bg-card px-2 py-1 rounded">
-                {slideNames[index]}
-              </span>
-            </button>
-          ))}
+        <div className="flex flex-col items-center gap-4 p-2 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl">
+          <button
+            onClick={() => navigateSlide("up")}
+            disabled={currentSlide === 0}
+            className="w-12 h-12 rounded-full flex items-center justify-center text-foreground/50 hover:text-primary disabled:opacity-20 transition-all hover:bg-white/10"
+          >
+            <ChevronUp size={24} />
+          </button>
+          
+          <div className="flex flex-col gap-3">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.id}
+                onClick={() => scrollToSlide(index)}
+                className="group relative flex items-center justify-center w-12 h-4"
+              >
+                <motion.div
+                  animate={{
+                    width: currentSlide === index ? 24 : 8,
+                    height: 8,
+                    backgroundColor: currentSlide === index ? "var(--color-primary)" : "var(--color-foreground)",
+                    opacity: currentSlide === index ? 1 : 0.2
+                  }}
+                  className="rounded-full transition-all duration-300"
+                />
+                {/* Tooltip */}
+                <div className="absolute right-14 px-3 py-1.5 rounded-lg bg-zinc-900/90 text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-all translate-x-2 group-hover:translate-x-0 whitespace-nowrap pointer-events-none border border-white/10">
+                  {slide.name}
+                </div>
+              </button>
+            ))}
+          </div>
+          
+          <button
+            onClick={() => navigateSlide("down")}
+            disabled={currentSlide === slides.length - 1}
+            className="w-12 h-12 rounded-full flex items-center justify-center text-foreground/50 hover:text-primary disabled:opacity-20 transition-all hover:bg-white/10"
+          >
+            <ChevronDown size={24} />
+          </button>
         </div>
-        
-        <button
-          onClick={() => navigateSlide("down")}
-          disabled={currentSlide === slides.length - 1}
-          className="w-12 h-12 rounded-full glass flex items-center justify-center text-foreground hover:text-primary hover:border-primary/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all hover:scale-110 glow-primary"
-        >
-          <ChevronDown className="w-6 h-6" />
-        </button>
-      </motion.div>
+      </motion.nav>
 
-      {/* Theme Toggle Button */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        className="fixed top-4 right-20 md:right-6 z-50"
-      >
+      {/* Floating Theme Toggle */}
+      <div className="fixed bottom-6 right-6 z-[60]">
         <ThemeToggle />
-      </motion.div>
+      </div>
 
-      {/* Mobile Menu Button */}
-      <motion.button
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="fixed top-4 right-4 z-50 md:hidden w-12 h-12 glass rounded-full flex items-center justify-center text-foreground"
-      >
-        {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-      </motion.button>
+      {/* Mobile Menu & Progress */}
+      <div className="fixed top-6 right-6 z-[60] flex items-center gap-4 lg:hidden">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center text-foreground shadow-2xl"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center"
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-[55] bg-background/80 flex items-center justify-center lg:hidden"
           >
-            <div className="space-y-4">
-              {slideNames.map((name, index) => (
-                <motion.button
-                  key={name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
+            <div className="flex flex-col gap-8 text-center">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
                   onClick={() => scrollToSlide(index)}
-                  className={`block text-xl ${
-                    currentSlide === index ? "text-primary font-semibold" : "text-muted-foreground"
+                  className={`text-4xl font-black transition-all ${
+                    currentSlide === index ? "text-primary scale-110" : "text-foreground/40"
                   }`}
                 >
-                  <span className="text-xs text-primary/50 mr-3">{String(index + 1).padStart(2, "0")}</span>
-                  {name}
-                </motion.button>
+                  {slide.name}
+                </button>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Progress Bar */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: (currentSlide + 1) / slides.length }}
-        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
+      {/* Main Slides Rendering */}
+      <div className="flex flex-col">
+        {slides.map((Slide, index) => (
+          <Slide.component key={Slide.id} />
+        ))}
+      </div>
+
+      {/* Global Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-primary z-[100] origin-left"
+        style={{ scaleX: (currentSlide + 1) / slides.length }}
       />
-
-      {/* Slide Counter */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-40 font-mono text-sm text-muted-foreground"
-      >
-        <span className="text-primary">{String(currentSlide + 1).padStart(2, "0")}</span>
-        <span className="mx-2">/</span>
-        <span>{String(slides.length).padStart(2, "0")}</span>
-      </motion.div>
-
-      {/* Slides */}
-      <Slide01Hook />
-      
-      <SectionDivider act="Act I" title="The Challenge" />
-      <Slide02Problem />
-      <Slide03WhyMatters />
-      
-      <SectionDivider act="Act II" title="The Solution" />
-      <Slide04Solution />
-      <Slide05HowWorks />
-      <Slide06Features />
-      <Slide07Demo />
-      <Slide08Tech />
-      
-      <SectionDivider act="Act III" title="The Future" />
-      <Slide09Advantage />
-      <Slide10Vision />
-      <Slide11Closing />
     </main>
   )
 }

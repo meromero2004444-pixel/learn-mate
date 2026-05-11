@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Geist_Mono } from 'next/font/google'
+import { Inter, Playfair_Display, Geist_Mono, Cairo, Readex_Pro } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -13,14 +13,26 @@ const playfair = Playfair_Display({
   variable: '--font-playfair'
 });
 
+const cairo = Cairo({
+  subsets: ["arabic"],
+  variable: '--font-cairo',
+  weight: ['300', '400', '500', '600', '700', '800']
+});
+
+const readex = Readex_Pro({
+  subsets: ["arabic"],
+  variable: '--font-readex',
+  weight: ['300', '400', '500', '600', '700']
+});
+
 const geistMono = Geist_Mono({ 
   subsets: ["latin"],
   variable: '--font-mono'
 });
 
 export const metadata: Metadata = {
-  title: 'NEXUS | Graduation Project',
-  description: 'The Future of Connected Intelligence - A cinematic project presentation',
+  title: 'LearnMate | رفيق التعلم',
+  description: 'مشروع تخرج - كلية التربية النوعية - جامعة بورسعيد',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -49,32 +61,32 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         {/* ── Inject theme CSS custom properties directly ── */}
         <style dangerouslySetInnerHTML={{ __html: `
           /* ── LIGHT MODE (default) ── */
           :root {
             /* Short vars — what Tailwind v4 @theme resolves to */
-            --background:         #eef2ff;
-            --foreground:         #1e1b4b;
+            --background:         #f8faff;
+            --foreground:         #0f172a;
             --card:               #ffffff;
-            --card-foreground:    #1e1b4b;
+            --card-foreground:    #0f172a;
             --popover:            #ffffff;
-            --popover-foreground: #1e1b4b;
-            --primary:            #7c3aed;
+            --popover-foreground: #0f172a;
+            --primary:            #6d28d9;
             --primary-foreground: #ffffff;
-            --secondary:          #0284c7;
+            --secondary:          #0369a1;
             --secondary-foreground: #ffffff;
-            --muted:              #e0e7ff;
-            --muted-foreground:   #6366f1;
-            --accent:             #db2777;
+            --muted:              #f1f5f9;
+            --muted-foreground:   #475569;
+            --accent:             #be185d;
             --accent-foreground:  #ffffff;
             --destructive:        #dc2626;
             --destructive-foreground: #ffffff;
-            --border:             #c7d2fe;
-            --input:              #c7d2fe;
-            --ring:               #7c3aed;
+            --border:             #e2e8f0;
+            --input:              #e2e8f0;
+            --ring:               #6d28d9;
 
             /* Long vars (--color-*) — also set directly for safety */
             --color-background:         #eef2ff;
@@ -143,19 +155,19 @@ export default function RootLayout({
           html, body {
             background-color: var(--background) !important;
             color:            var(--foreground) !important;
-            transition: background-color 0.45s ease, color 0.35s ease;
+            transition: background-color 0.3s ease, color 0.2s ease;
           }
 
           /* ── Transition all elements smoothly on theme change ── */
           *, *::before, *::after {
             transition-property: background-color, color, border-color, fill, stroke;
-            transition-duration: 0.4s;
+            transition-duration: 0.25s;
             transition-timing-function: ease;
           }
         ` }} />
 
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} ${cairo.variable} ${readex.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -164,12 +176,12 @@ export default function RootLayout({
           {/* Cinematic Ambient Blobs */}
           <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
             <div
-              className="absolute top-[-15%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[130px] animate-pulse-slow"
-              style={{ background: "var(--nexus-primary)", opacity: 0.15 }}
+              className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full blur-[80px] animate-pulse-slow"
+              style={{ background: "var(--primary)", opacity: 0.1 }}
             />
             <div
-              className="absolute bottom-[-15%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[130px] animate-pulse-slow"
-              style={{ background: "var(--nexus-secondary)", opacity: 0.12, animationDelay: "2s" }}
+              className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full blur-[80px] animate-pulse-slow"
+              style={{ background: "var(--secondary)", opacity: 0.08, animationDelay: "2s" }}
             />
             <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.025]"

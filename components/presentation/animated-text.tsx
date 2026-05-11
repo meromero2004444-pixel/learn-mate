@@ -18,10 +18,10 @@ export function AnimatedText({
 }: AnimatedTextProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 15 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       <Component className={className}>{children}</Component>
     </motion.div>
@@ -42,10 +42,10 @@ export function FadeIn({
   direction = "up"
 }: FadeInProps) {
   const directionOffset = {
-    up: { y: 40 },
-    down: { y: -40 },
-    left: { x: 40 },
-    right: { x: -40 }
+    up: { y: 20 },
+    down: { y: -20 },
+    left: { x: 20 },
+    right: { x: -20 }
   }
 
   return (
@@ -53,7 +53,7 @@ export function FadeIn({
       initial={{ opacity: 0, ...directionOffset[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}
@@ -70,10 +70,10 @@ interface ScaleInProps {
 export function ScaleIn({ children, delay = 0, className = "" }: ScaleInProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >
       {children}

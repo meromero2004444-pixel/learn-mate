@@ -16,7 +16,7 @@ export function SlideWrapper({ children, className = "", id }: SlideWrapperProps
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "-20%" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className={`min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden px-6 md:px-12 lg:px-24 py-20 ${className}`}
     >
       {children}

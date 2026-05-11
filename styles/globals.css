@@ -2,92 +2,56 @@
 @import 'tw-animate-css';
 
 /* ═══════════════════════════════════════════════════════
-   NEXUS — Theme System
-   Colors are injected via <style> in layout.tsx,
-   NOT via @theme, because @theme bakes values at compile time.
+   LearnMate — Premium Design System
    ═══════════════════════════════════════════════════════ */
 
 @theme inline {
-  /* Fonts only — no colors here */
-  --font-sans:    'Inter', sans-serif;
+  --font-sans:    var(--font-readex), var(--font-cairo), sans-serif;
   --font-mono:    'Geist Mono', monospace;
-  --font-display: 'Playfair Display', serif;
+  --font-display: var(--font-readex), var(--font-cairo), serif;
 
-  /* Animations */
-  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float:      float  3s ease-in-out infinite;
 
-  --radius: 1rem;
+  --radius: 1.5rem;
 }
 
-/* ── Keyframes ── */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-10px); }
+  50%       { transform: translateY(-15px); }
 }
 
-/* ── Base layer — uses CSS custom properties set in layout.tsx ── */
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
-    border-color: var(--color-border, #e2e8f0);
+    border-color: var(--color-border, rgba(226, 232, 240, 0.1));
+  }
+
+  body {
+    @apply antialiased selection:bg-primary/30 selection:text-primary;
+    background-color: var(--background);
+    color: var(--foreground);
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    @apply tracking-tight leading-tight;
   }
 }
 
-/* ── Glassmorphism components ── */
 @layer components {
-  .glass {
-    background:              rgba(255, 255, 255, 0.55);
-    border:                  1px solid rgba(0, 0, 0, 0.10);
-    backdrop-filter:         blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow:              0 4px 24px rgba(0, 0, 0, 0.06);
-    transition: background 0.4s ease, border-color 0.4s ease;
-  }
-
-  html.dark .glass {
-    background:  rgba(24, 24, 27, 0.65);
-    border:      1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:  0 8px 32px rgba(0, 0, 0, 0.50);
-  }
-
-  .glass-card {
-    border-radius: var(--radius, 1rem);
-    padding: 1.5rem;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .glass-card:hover {
-    transform:  translateY(-4px);
-  }
-
   .gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary,   #7c3aed) 0%,
-      var(--color-secondary, #0284c7) 50%,
-      var(--color-accent,    #db2777) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip:         text;
-    color:                   transparent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent animate-gradient;
   }
 
-  .glow-primary {
-    filter: drop-shadow(0 0 10px var(--color-primary, #7c3aed));
+  .glass-surface {
+    @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-white/20 dark:border-white/5 shadow-2xl dark:shadow-none;
   }
 }
 
-/* ── Custom Scrollbar ── */
-.custom-scrollbar::-webkit-scrollbar       { width: 5px; }
+/* ── Custom Utilities ── */
+.custom-scrollbar::-webkit-scrollbar       { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background:    var(--color-primary, #7c3aed);
-  border-radius: 9999px;
-  opacity: 0.4;
+  @apply bg-primary/40 rounded-full hover:bg-primary transition-colors;
 }
