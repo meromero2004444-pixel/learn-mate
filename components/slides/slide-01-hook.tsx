@@ -56,7 +56,7 @@ export function Slide01Hook() {
           </h1>
           
           <p className="text-4xl md:text-7xl font-black text-foreground drop-shadow-md tracking-tight leading-tight">
-            رفيق التعلم الذكي
+            رفيق التعلم 
           </p>
         </motion.div>
 
