@@ -1,10 +1,37 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { SlideWrapper } from "@/components/presentation/slide-wrapper"
 import { Sparkles, GraduationCap, Calendar } from "lucide-react"
 
 export function Slide01Hook() {
+  const reduceMotion = useReducedMotion()
+  const fullText = "LearnMate"
+  const [displayIdx, setDisplayIdx] = useState(reduceMotion ? fullText.length : 0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    if (reduceMotion) return
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (!isDeleting) {
+      if (displayIdx < fullText.length) {
+        timeout = setTimeout(() => setDisplayIdx(prev => prev + 1), 90)
+      } else {
+        timeout = setTimeout(() => setIsDeleting(true), 2200)
+      }
+    } else {
+      if (displayIdx > 0) {
+        timeout = setTimeout(() => setDisplayIdx(prev => prev - 1), 45)
+      } else {
+        timeout = setTimeout(() => setIsDeleting(false), 700)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayIdx, isDeleting, reduceMotion, fullText.length])
+
   return (
     <SlideWrapper
       id="cover"
@@ -43,7 +70,7 @@ export function Slide01Hook() {
         <motion.div
           initial={{ opacity: 0, scale: 0.99 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.75, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
           className="relative py-4 md:py-8"
         >
           <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-l from-primary/12 via-transparent to-secondary/12 blur-[100px]" />
@@ -67,9 +94,15 @@ export function Slide01Hook() {
               مشروع تخرج
             </motion.span>
 
-            <div className="group relative cursor-default">
-                              <h1 className="text-fluid-h1 mb-1 md:mb-1 font-black leading-[0.95] tracking-tighter select-none">
-                <span className="gradient-text">LearnMate</span>
+            <div className="group relative cursor-default" dir="ltr">
+              <h1 className="text-fluid-h1 mb-1 md:mb-1 font-black leading-[0.95] tracking-tighter select-none">
+                <span className="gradient-text">{fullText.slice(0, displayIdx)}</span>
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
+                  className="inline-block w-[0.08em] h-[0.85em] rounded-full bg-gradient-to-b from-primary to-accent align-middle -me-0.5"
+                  aria-hidden
+                />
               </h1>
               <div className="pointer-events-none absolute -inset-4 md:-inset-6 rounded-[3rem] bg-primary/6 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
             </div>
@@ -77,7 +110,7 @@ export function Slide01Hook() {
             <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ delay: 0.7, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
               className="text-fluid-h2 font-bold text-foreground"
             >
               رفيق التعلم
@@ -88,7 +121,7 @@ export function Slide01Hook() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.55, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ delay: 1.0, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
           className="mt-6 md:mt-10 flex flex-col items-center gap-4 md:gap-7"
         >
           <div className="flex items-center gap-2 md:gap-4 rounded-[2rem] border border-border/60 bg-[color-mix(in_oklch,var(--card)_60%,transparent)] px-5 md:px-9 py-2.5 md:py-4 text-sm md:text-lg lg:text-xl font-semibold tracking-wide text-foreground/80 shadow-md backdrop-blur-xl transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/22 hover:shadow-lg dark:border-white/[0.07]">
