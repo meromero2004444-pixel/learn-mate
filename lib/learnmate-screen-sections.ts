@@ -1,20 +1,39 @@
 export type LearnmateScreen = { image: string; text: string }
 
-function cleanFilename(filename: string): string {
-  // Removing extension
-  let name = filename.replace(/\.[^/.]+$/, "")
-  // Removing feem_ prefix if any
-  name = name.replace(/^feem_/i, "")
-  // Removing WA numbers and dates if any (optional, but user wants "exact text")
-  // Let's assume the user renamed them exactly, so we just clean common noise.
-  name = name.replace(/WhatsApp Image \d{4}-\d{2}-\d{2} at \d{1,2}\.\d{2}\.\d{2} [AP]M/i, "")
-  
-  return name.trim() || "لقطة شاشة"
-}
+/**
+ * النصوص الثابتة التي تظهر فوق كل لقطة شاشة.
+ * هذه النصوص لا تتغير عند إعادة تسمية ملفات الصور.
+ * يمكنك تعديلها يدوياً هنا كما تريد.
+ */
+export const SCREEN_CAPTIONS: string[] = [
+  "ثم بعد ذلك ننتقل الي التطبيق ندخل علي الصفحة الرئيسية ونسجل الدخول",
+  "ننتقل بعد ذلك الي النبذة وهنا نبدأ بالتعرف علي الكلية وما يشملها مثل عنوانها وتعريفها وأقسامها",
+  "",
+  "",
+  "",
+  "",
+  "في بداية كل قسم يوجد رسالة توضحية تبين المحتويات وما يتم عمله في هذا القسم",
+  "ننتقل بعد ذلك الي قسم تكنولوجيا التعليم وهذا القسم يشمل المحتوي التعليمي الخاص بالفرقة الاولي",
+  "المواد مقسمة الي قسمين مواد عملية ومواد نظرية",
+  "",
+  "",
+  "",
+  "كل ماده تحتوي علي تحليل مبسط للمادة وفيديو ai يشرح ملخص المادة",
+  "",
+  "",
+  "يوفر هذا القسم مساحة داعمة لطلاب الكلية لعرض مهاراتهم ومشاركة محتواهم مع الآخرين، سواء كانوا متميزين في مهارة معينة، أو في بداية رحلتهم بصناعة المحتوى",
+  "ويشمل هذا القسم أيضاً العديد من الكورسات الإلكترونية التي قد تساعد الطلاب فى المرحلة التعليمية او المرحلة البعد الجامعية في سوق العمل",
+  "ويشمل كورس Creative & Multimedia — Graphic Design, Photoshop, Illustrator",
+  "tech — Programming & Basics, Software & Development, IT & Tools, Networking & General Tech",
+  "soft skills — English Courses, ICDL, Office, French Language, German Language",
+  "اهم المهارات لمعلم الحاسب الالي — المهارات التربوية، المهارات العملية، كورسات تعليمية",
+  "هذا القسم عبارة عن مساحة تفاعلية تجمع الطلاب، تتيح لهم التواصل فيما بينهم، وتبادل النقاشات والأفكار",
+  "يعد قسم الذكاء الاصطناعي مساحة داعمة للطلاب حيث يوفر لهم إمكانية طرح مختلف الاستفسارات والأسئلة المتعلقة بالكلية",
+]
 
-export function buildScreenshotsFromPublic(images: string[]): LearnmateScreen[] {
-  return images.map((image) => ({
+export function buildScreenshotsFromPublic(images: string[], captions?: string[]): LearnmateScreen[] {
+  return images.map((image, i) => ({
     image,
-    text: cleanFilename(decodeURIComponent(image.split("/").pop() || "")),
+    text: captions?.[i] ?? "",
   }))
 }

@@ -68,7 +68,7 @@ export function Slide01Hook() {
             </motion.span>
 
             <div className="group relative cursor-default">
-              <h1 className="text-fluid-h1 mb-1 md:mb-1 font-black leading-[0.95] tracking-tighter select-none">
+                              <h1 className="text-fluid-h1 mb-1 md:mb-1 font-black leading-[0.95] tracking-tighter select-none">
                 <span className="gradient-text">LearnMate</span>
               </h1>
               <div className="pointer-events-none absolute -inset-4 md:-inset-6 rounded-[3rem] bg-primary/6 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
