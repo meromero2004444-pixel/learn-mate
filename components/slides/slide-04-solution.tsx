@@ -7,102 +7,107 @@ import { AnimatedText, FadeIn } from "@/components/presentation/animated-text"
 
 const objectives = [
   {
-    icon: <Target className="w-8 h-8" />,
+    id: "self-paced",
+    icon: <Target className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "تحقيق التعلم الذاتي الفعال من خلال بيئة تعليمية ذكية ومتكاملة",
-    color: "from-blue-500 to-cyan-500"
+    color: "from-primary to-accent",
   },
   {
-    icon: <BookOpen className="w-8 h-8" />,
+    id: "resources",
+    icon: <BookOpen className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "توفير مصادر تعليمية متنوعة تدعم مختلف أنماط التعلم لدى الطلاب",
-    color: "from-purple-500 to-pink-500"
+    color: "from-secondary to-primary",
   },
   {
-    icon: <Users className="w-8 h-8" />,
+    id: "interaction",
+    icon: <Users className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "تعزيز التفاعل بين الطلاب والمعلمين من خلال أدوات تواصل حديثة",
-    color: "from-amber-500 to-orange-500"
+    color: "from-accent to-secondary",
   },
   {
-    icon: <Zap className="w-8 h-8" />,
+    id: "multimedia",
+    icon: <Zap className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "تبسيط المفاهيم المعقدة باستخدام تقنيات الوسائط المتعددة المتقدمة",
-    color: "from-emerald-500 to-teal-500"
+    color: "from-primary to-secondary",
   },
   {
-    icon: <BarChart3 className="w-8 h-8" />,
+    id: "progress",
+    icon: <BarChart3 className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "متابعة مستوى تقدم الطلاب وتقديم تغذية راجعة فورية ودقيقة",
-    color: "from-indigo-500 to-blue-500"
+    color: "from-secondary to-accent",
   },
   {
-    icon: <Globe className="w-8 h-8" />,
+    id: "access",
+    icon: <Globe className="h-6 w-6 sm:h-7 sm:w-7" aria-hidden />,
     text: "تمكين الوصول للمحتوى التعليمي في أي وقت ومن أي مكان بسهولة",
-    color: "from-rose-500 to-red-500"
-  }
-]
+    color: "from-accent to-primary",
+  },
+] as const
 
 export function Slide04Solution() {
   return (
-    <SlideWrapper id="objectives" className="relative py-24">
-      {/* Background Orbs */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -z-10 animate-float" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] -z-10 animate-float" style={{ animationDelay: '3s' }} />
+    <SlideWrapper
+      id="objectives"
+      ariaLabel="أهداف المشروع"
+      className="relative flex flex-col justify-center py-10 sm:py-14 min-h-screen"
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -start-[10%] top-1/4 h-[28rem] w-[28rem] rounded-full bg-primary/[0.07] blur-[120px] animate-float gpu-accel" />
+        <div className="absolute -end-[8%] bottom-1/4 h-[26rem] w-[26rem] rounded-full bg-secondary/[0.06] blur-[120px] animate-float gpu-accel [animation-delay:2.5s]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-primary/25 to-transparent" />
+      </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-24">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col px-4 sm:px-6 md:px-8">
+        <header className="mb-6 md:mb-10 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-primary text-sm font-black mb-8"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-[color-mix(in_oklch,var(--card)_55%,transparent)] px-2.5 md:px-5 py-1 md:py-1.5 text-[9px] sm:text-xs font-semibold tracking-wide text-primary shadow-sm backdrop-blur-md"
           >
-            <Sparkles size={16} className="text-primary animate-pulse" />
-            <span>رؤية مستقبلية</span>
+            <Sparkles className="h-3 w-3.5 md:h-3.5 md:w-3.5 shrink-0 opacity-90" aria-hidden />
+            <span>رؤية مستقبلية طموحة</span>
           </motion.div>
-          
-          <AnimatedText 
-            as="h2" 
-            className="text-6xl md:text-8xl font-black text-foreground mb-8 tracking-tighter leading-none"
+
+          <AnimatedText
+            as="h2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground"
           >
             أهداف المشروع
           </AnimatedText>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium">
-            نسعى من خلال <span className="text-primary font-bold">LearnMate</span> لإعادة تعريف العملية التعليمية بما يواكب التحول الرقمي
+          <p className="mx-auto mt-2 md:mt-3 max-w-2xl text-xs md:text-sm leading-relaxed text-muted-foreground">
+            محاور أساسية يبني عليها LearnMate تجربة تعليمية متكاملة وواضحة.
           </p>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ul className="mx-auto grid w-full max-w-5xl list-none grid-cols-1 justify-items-center gap-3 md:gap-5 lg:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {objectives.map((obj, index) => (
-            <FadeIn key={index} delay={0.05 * index}>
-              <motion.div
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group relative h-full"
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition duration-500 blur-sm rounded-[2.5rem] bg-white/20" />
-                
-                <div className="relative h-full bg-white/60 dark:bg-zinc-900/40 backdrop-blur-3xl border border-white/40 dark:border-white/5 rounded-[2.5rem] p-10 flex flex-col items-start gap-8 shadow-2xl dark:shadow-none transition-all duration-300">
-                  <div className={`w-20 h-20 rounded-[1.5rem] bg-gradient-to-br ${obj.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    {obj.icon}
+            <li key={obj.id} className="min-h-0 w-full max-w-md sm:max-w-none">
+              <FadeIn delay={0.04 * index}>
+                <motion.article
+                  whileHover={{ y: -3 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 28 }}
+                  className="group relative flex h-full flex-col gpu-accel"
+                >
+                  <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/12 via-transparent to-secondary/10 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative flex h-full flex-col rounded-3xl border border-border/70 bg-[color-mix(in_oklch,var(--card)_72%,transparent)] p-4 md:p-6 shadow-[0_1px_0_0_color-mix(in_oklch,var(--foreground)_6%,transparent)_inset] backdrop-blur-xl transition-[border-color,box-shadow,background-color] duration-300 dark:border-white/[0.08] dark:bg-[color-mix(in_oklch,var(--card)_55%,transparent)]">
+                    <div
+                      className={`mb-3 md:mb-4 flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-2xl bg-gradient-to-br ${obj.color} text-white shadow-md ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.03]`}
+                    >
+                      {obj.icon}
+                    </div>
+                    <p className="text-right text-sm sm:text-[14px] md:text-[15px] lg:text-[17px] font-semibold leading-snug tracking-tight text-foreground">
+                      {obj.text}
+                    </p>
+                    <div className="mt-3 md:mt-5 flex items-center justify-end gap-2 border-t border-border/50 pt-3 md:pt-4 dark:border-white/[0.06]">
+                      <span className="h-1 w-6 md:w-8 rounded-full bg-primary/35 transition-all duration-300 group-hover:w-10 md:group-hover:w-12 group-hover:bg-primary/60" />
+                    </div>
                   </div>
-                  
-                  <p className="text-2xl md:text-3xl font-black text-foreground leading-tight text-right w-full tracking-tight">
-                    {obj.text}
-                  </p>
-                  
-                  <div className="mt-auto pt-6 flex items-center gap-2 text-primary font-black text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>هدف استراتيجي</span>
-                    <Zap size={14} className="fill-current" />
-                  </div>
-                </div>
-              </motion.div>
-            </FadeIn>
+                </motion.article>
+              </FadeIn>
+            </li>
           ))}
-        </div>
-
-        <FadeIn delay={0.5}>
-          <div className="mt-32 p-12 rounded-[3rem] bg-primary/5 border border-primary/10 backdrop-blur-md text-center max-w-4xl mx-auto">
-            <p className="text-2xl md:text-4xl font-black text-foreground leading-tight italic opacity-80">
-              "نحن لا نبني مجرد منصة، بل نصيغ مستقبل التعليم الرقمي"
-            </p>
-          </div>
-        </FadeIn>
+        </ul>
       </div>
     </SlideWrapper>
   )

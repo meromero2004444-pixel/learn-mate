@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
+import { useTheme } from "@teispace/next-themes"
+import { cn } from "@/lib/utils"
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
@@ -12,18 +13,11 @@ export function ThemeToggle() {
     setMounted(true)
   }, [])
 
-  // Render a placeholder that matches the final button size to avoid layout shift
   if (!mounted) {
     return (
       <div
-        style={{
-          width: 48,
-          height: 48,
-          borderRadius: 9999,
-          background: "rgba(255,255,255,0.15)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          backdropFilter: "blur(12px)",
-        }}
+        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border/60 bg-card/40 backdrop-blur-xl"
+        aria-hidden
       />
     )
   }
@@ -32,50 +26,22 @@ export function ThemeToggle() {
 
   return (
     <button
+      type="button"
       id="theme-toggle"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      style={{
-        width: 48,
-        height: 48,
-        borderRadius: 9999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        border: "2px solid var(--color-primary)",
-        background: isDark
-          ? "rgba(167, 139, 250, 0.15)"   /* dark: subtle violet tint */
-          : "rgba(124, 58, 237, 0.12)",   /* light: subtle violet tint */
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        color: "var(--color-primary)",
-        boxShadow: `0 0 16px var(--color-primary), 0 4px 16px rgba(0,0,0,0.2)`,
-        transition: "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
-        outline: "none",
-      }}
-      onMouseEnter={e => {
-        const el = e.currentTarget
-        el.style.transform = "scale(1.15) rotate(15deg)"
-        el.style.boxShadow = `0 0 28px var(--color-primary), 0 8px 24px rgba(0,0,0,0.3)`
-      }}
-      onMouseLeave={e => {
-        const el = e.currentTarget
-        el.style.transform = "scale(1) rotate(0deg)"
-        el.style.boxShadow = `0 0 16px var(--color-primary), 0 4px 16px rgba(0,0,0,0.2)`
-      }}
-      onMouseDown={e => {
-        e.currentTarget.style.transform = "scale(0.92)"
-      }}
-      onMouseUp={e => {
-        e.currentTarget.style.transform = "scale(1.1)"
-      }}
+      aria-label={isDark ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"}
+      title={isDark ? "وضع فاتح" : "وضع داكن"}
+      className={cn(
+        "group relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-primary/50 text-primary shadow-[0_0_20px_color-mix(in_oklch,var(--primary)_35%,transparent)] transition-all duration-300 ease-out",
+        "bg-[color-mix(in_oklch,var(--card)_55%,transparent)] backdrop-blur-xl",
+        "hover:scale-110 hover:border-primary hover:shadow-[0_0_28px_color-mix(in_oklch,var(--primary)_45%,transparent)]",
+        "active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      )}
     >
       {isDark ? (
-        <Sun style={{ width: 22, height: 22, strokeWidth: 2.5 }} />
+        <Sun className="h-[22px] w-[22px] stroke-[2.5]" aria-hidden />
       ) : (
-        <Moon style={{ width: 22, height: 22, strokeWidth: 2.5 }} />
+        <Moon className="h-[22px] w-[22px] stroke-[2.5]" aria-hidden />
       )}
     </button>
   )

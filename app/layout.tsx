@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display, Geist_Mono, Cairo, Readex_Pro } from 'next/font/google'
+import { Inter, Playfair_Display, Geist_Mono, Cairo, Readex_Pro, IBM_Plex_Sans_Arabic, Baloo_Bhaijaan_2, Tajawal } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -25,15 +25,52 @@ const readex = Readex_Pro({
   weight: ['300', '400', '500', '600', '700']
 });
 
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: '--font-ibm-plex',
+  weight: ['100', '200', '300', '400', '500', '600', '700']
+});
+
 const geistMono = Geist_Mono({ 
   subsets: ["latin"],
   variable: '--font-mono'
 });
 
+const baloo = Baloo_Bhaijaan_2({
+  subsets: ["arabic", "latin"],
+  variable: '--font-heading',
+  weight: ['400', '500', '600', '700', '800']
+});
+
+const tajawal = Tajawal({
+  subsets: ["arabic", "latin"],
+  variable: '--font-body',
+  weight: ['200', '300', '400', '500', '700', '800', '900']
+});
+
 export const metadata: Metadata = {
   title: 'LearnMate | رفيق التعلم',
-  description: 'مشروع تخرج - كلية التربية النوعية - جامعة بورسعيد',
-  generator: 'v0.app',
+  description:
+    'LearnMate — منصة تعليمية ذكية. مشروع تخرج، كلية التربية النوعية، جامعة بورسعيد.',
+  keywords: [
+    'LearnMate',
+    'رفيق التعلم',
+    'جامعة بورسعيد',
+    'التربية النوعية',
+    'تكنولوجيا التعليم',
+    'تعليم رقمي',
+  ],
+  openGraph: {
+    title: 'LearnMate | رفيق التعلم',
+    description: 'عرض تقديمي لمشروع التخرج — منصة تعليمية ذكية.',
+    locale: 'ar_EG',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LearnMate | رفيق التعلم',
+    description: 'عرض تقديمي لمشروع التخرج — منصة تعليمية ذكية.',
+  },
   icons: {
     icon: [
       {
@@ -54,6 +91,7 @@ export const metadata: Metadata = {
 }
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function RootLayout({
   children,
@@ -155,19 +193,12 @@ export default function RootLayout({
           html, body {
             background-color: var(--background) !important;
             color:            var(--foreground) !important;
-            transition: background-color 0.3s ease, color 0.2s ease;
-          }
-
-          /* ── Transition all elements smoothly on theme change ── */
-          *, *::before, *::after {
-            transition-property: background-color, color, border-color, fill, stroke;
-            transition-duration: 0.25s;
-            transition-timing-function: ease;
+            transition: background-color 0.35s ease, color 0.25s ease;
           }
         ` }} />
 
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} ${cairo.variable} ${readex.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} ${geistMono.variable} ${cairo.variable} ${readex.variable} ${ibmPlexArabic.variable} ${baloo.variable} ${tajawal.variable} font-body antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -191,6 +222,7 @@ export default function RootLayout({
 
           {children}
           {process.env.NODE_ENV === 'production' && <Analytics />}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

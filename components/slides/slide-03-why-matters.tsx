@@ -1,92 +1,93 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Award, ShieldCheck, Building2, Stars } from "lucide-react"
+import { Award, ShieldCheck, Building2 } from "lucide-react"
 import { SlideWrapper } from "@/components/presentation/slide-wrapper"
 import { AnimatedText, FadeIn } from "@/components/presentation/animated-text"
 
+const administration = [
+  {
+    name: "أ.د احمد الروبي",
+    role: "عميد الكلية",
+    icon: <ShieldCheck className="h-8 w-8 sm:h-9 sm:w-9" aria-hidden />,
+    color: "from-primary to-accent",
+  },
+  {
+    name: "أ.د نهله المتولي",
+    role: "رئيس القسم",
+    icon: <Award className="h-8 w-8 sm:h-9 sm:w-9" aria-hidden />,
+    color: "from-secondary to-primary",
+  },
+]
+
 export function Slide03WhyMatters() {
   return (
-    <SlideWrapper id="administration" className="relative py-24">
-      {/* Dynamic Background */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[150px] -z-10" />
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] -z-10" />
+    <SlideWrapper id="administration" ariaLabel="إدارة الكلية والقسم" className="relative overflow-hidden py-8 md:py-16 flex flex-col justify-center min-h-screen">
+      {/* Prestigious Spotlight Background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,oklch(var(--primary)/0.08)_0%,transparent_70%)] -z-10" />
+      
+      <div className="absolute top-0 right-0 w-[20rem] md:w-[30rem] h-[20rem] md:h-[30rem] bg-primary/5 rounded-full blur-[100px] md:blur-[140px] -z-10 animate-float gpu-accel" />
+      <div className="absolute bottom-0 left-0 w-[20rem] md:w-[30rem] h-[20rem] md:h-[30rem] bg-secondary/5 rounded-full blur-[100px] md:blur-[140px] -z-10 animate-float gpu-accel" style={{ animationDelay: '3s' }} />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-24">
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col px-4 sm:px-6 md:px-8">
+        <div className="mb-8 md:mb-12 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 justify-center mb-6"
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mx-auto mb-4 md:mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-[color-mix(in_oklch,var(--card)_60%,transparent)] px-3 md:px-4 py-1 md:py-1.5 text-primary shadow-sm backdrop-blur-md"
+            aria-hidden
           >
-            <Building2 className="text-primary" size={24} />
-            <span className="text-sm font-black uppercase tracking-[0.3em] text-primary">تحت رعاية</span>
+            <Building2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-primary/90" />
           </motion.div>
-          
-          <AnimatedText 
-            as="h2" 
-            className="text-6xl md:text-8xl font-black text-foreground mb-8 leading-tight tracking-tight"
+
+          <AnimatedText
+            as="h2"
+            className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground"
           >
-            إدارة الكلية والقسم
+            إدارة الكلية
           </AnimatedText>
-          <div className="flex items-center justify-center gap-4">
-             <div className="h-px w-24 bg-gradient-to-r from-transparent to-primary" />
-             <Stars className="text-primary animate-pulse" />
-             <div className="h-px w-24 bg-gradient-to-l from-transparent to-primary" />
-          </div>
+          <p className="mx-auto mt-1.5 md:mt-3 max-w-[260px] md:max-w-md text-xs md:text-sm text-muted-foreground">
+            قيادة أكاديمية تدعم رحلة المشروع.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
-          <FadeIn delay={0.1} direction="up">
-            <motion.div
-              whileHover={{ y: -10 }}
-              className="relative group p-1 bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-transparent rounded-[3rem] shadow-2xl transition-all duration-500 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-3xl -z-10" />
-              <div className="p-10 md:p-14 text-center space-y-8">
-                <div className="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary mx-auto mb-10 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-inner">
-                  <Award size={56} className="drop-shadow-lg" />
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-primary/60 tracking-widest uppercase">رئيس القسم</h3>
-                  <p className="text-5xl md:text-6xl font-black text-foreground drop-shadow-sm tracking-tight leading-tight">أ.د نهله المتولي</p>
-                </div>
-                <div className="pt-6">
-                  <div className="inline-block px-6 py-2 rounded-full border border-primary/20 text-sm font-bold text-primary backdrop-blur-md">
-                    قيادة وتطوير
+        <div className="mx-auto flex w-full max-w-4xl flex-col items-stretch justify-center gap-3 sm:gap-5 md:gap-8 md:flex-row md:justify-center">
+          {administration.map((admin, index) => (
+            <FadeIn key={admin.name} delay={0.08 * index} direction={index === 0 ? "right" : "left"}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 380, damping: 26 }}
+                className="group relative flex w-full flex-1 gpu-accel md:min-w-[260px]"
+              >
+                <div className="pointer-events-none absolute -inset-px rounded-[2rem] bg-gradient-to-br from-primary/15 via-transparent to-secondary/10 opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative flex h-full min-h-[160px] sm:min-h-[200px] md:min-h-[300px] w-full flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6 rounded-[1.5rem] sm:rounded-[2rem] border border-border/70 bg-[color-mix(in_oklch,var(--card)_70%,transparent)] px-5 sm:px-8 md:px-10 py-6 sm:py-8 md:py-12 text-center shadow-[0_20px_50px_-24px_color-mix(in_oklch,var(--foreground)_12%,transparent)] backdrop-blur-xl transition-[border-color,box-shadow] duration-300 dark:border-white/[0.08] dark:bg-[color-mix(in_oklch,var(--card)_50%,transparent)]">
+                  <div
+                    className={`flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${admin.color} text-white shadow-lg ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105`}
+                  >
+                    {admin.icon}
+                  </div>
+                  <div className="space-y-1.5 sm:space-y-2 md:space-y-3">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                      {admin.name}
+                    </h3>
+                    <div className="mx-auto h-0.5 w-8 md:w-10 rounded-full bg-primary/25 transition-all duration-500 group-hover:w-12 md:group-hover:w-16 group-hover:bg-primary/40" />
+                    <p className="text-xs sm:text-sm font-medium leading-relaxed text-muted-foreground">
+                      {admin.role}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </FadeIn>
-
-          <FadeIn delay={0.2} direction="up">
-            <motion.div
-              whileHover={{ y: -10 }}
-              className="relative group p-1 bg-gradient-to-br from-white/20 to-white/5 dark:from-white/10 dark:to-transparent rounded-[3rem] shadow-2xl transition-all duration-500 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-white/40 dark:bg-zinc-900/40 backdrop-blur-3xl -z-10" />
-              <div className="p-10 md:p-14 text-center space-y-8">
-                <div className="w-28 h-28 rounded-[2rem] bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center text-secondary mx-auto mb-10 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 shadow-inner">
-                  <ShieldCheck size={56} className="drop-shadow-lg" />
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-secondary/60 tracking-widest uppercase">عميد الكلية</h3>
-                  <p className="text-5xl md:text-6xl font-black text-foreground drop-shadow-sm tracking-tight leading-tight">أ.د احمد الروبي</p>
-                </div>
-                <div className="pt-6">
-                  <div className="inline-block px-6 py-2 rounded-full border border-secondary/20 text-sm font-bold text-secondary backdrop-blur-md">
-                    رؤية وتميز
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </FadeIn>
+              </motion.div>
+            </FadeIn>
+          ))}
         </div>
 
-        <FadeIn delay={0.4}>
-          <div className="mt-32 text-center">
-            <p className="text-xl font-black tracking-[0.5em] text-foreground/20 uppercase">جامعة بورسعيد — 2026</p>
+        <FadeIn delay={0.25}>
+          <div className="mt-8 md:mt-14 text-center">
+            <div className="mx-auto mb-3 md:mb-5 h-px w-32 md:w-40 max-w-full bg-gradient-to-l from-transparent via-foreground/12 to-transparent" />
+            <p className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.25em] md:tracking-[0.35em] text-muted-foreground">
+              جامعة بورسعيد — 2026
+            </p>
           </div>
         </FadeIn>
       </div>

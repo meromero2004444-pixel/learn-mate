@@ -1,23 +1,29 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { ReactNode } from "react"
 
 interface SlideWrapperProps {
   children: ReactNode
   className?: string
   id?: string
+  /** Accessible name for this slide region (Arabic). */
+  ariaLabel?: string
 }
 
-export function SlideWrapper({ children, className = "", id }: SlideWrapperProps) {
+export function SlideWrapper({ children, className = "", id, ariaLabel }: SlideWrapperProps) {
+  const reduce = useReducedMotion()
+
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-20%" }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden px-6 md:px-12 lg:px-24 py-20 ${className}`}
+      role="region"
+      aria-label={ariaLabel}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25, margin: "0px 0px -5% 0px" }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative flex h-[100dvh] min-h-[100dvh] w-full snap-start snap-always flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 ${className}`}
     >
       {children}
     </motion.section>

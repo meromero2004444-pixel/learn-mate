@@ -38,7 +38,7 @@ export function Slide10Vision() {
           </AnimatedText>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-20">
           {milestones.map((milestone, index) => (
             <FadeIn key={milestone.year} delay={0.2 + index * 0.15}>
               <motion.div
@@ -62,7 +62,7 @@ export function Slide10Vision() {
             <h3 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12 relative z-10">
               Projected Impact by 2028
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 relative z-10">
               <StatCard value={10} suffix="M+" label="Users" delay={0} />
               <StatCard value={500} suffix="+" label="Enterprises" delay={0.1} />
               <StatCard value={50} suffix="B" prefix="$" label="Data Processed" delay={0.2} />
